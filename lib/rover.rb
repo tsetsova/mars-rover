@@ -20,8 +20,8 @@ class Rover
     @facing = turn("left")
   end
 
-  def forward(number = 1)
-    coordinate(number)
+  def forward(steps = 1)
+    walk(steps)
   end
 
   private
@@ -32,15 +32,15 @@ class Rover
     return DIRECTIONS[index - 1] if direction == "left"
   end
 
-  def coordinate(number)
+  def walk(steps)
     if @facing == :N
-      @y_coordinate += number
+      @y_coordinate += steps
     elsif @facing == :S
-      @y_coordinate -= number
+      @y_coordinate -= steps
     elsif @facing == :W
-      @x_coordinate += number
+      @x_coordinate += steps
     elsif @facing == :E
-      @x_coordinate -= number
+      @x_coordinate -= steps
     else
       "coordinates are invalid"
     end
