@@ -13,11 +13,11 @@ class Rover
   end
 
   def turn_right
-    @facing = turn("right")
+    @facing = turn(:right)
   end
 
   def turn_left
-    @facing = turn("left")
+    @facing = turn(:left)
   end
 
   def forward
@@ -28,8 +28,8 @@ class Rover
 
   def turn(direction)
     index = DIRECTIONS.find_index(@facing)
-    return DIRECTIONS[index + 1] if direction == "right"
-    return DIRECTIONS[index - 1] if direction == "left"
+    return DIRECTIONS[index + 1] if direction == :right
+    return DIRECTIONS[index - 1] if direction == :left
   end
 
   def move
