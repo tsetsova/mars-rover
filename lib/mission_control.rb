@@ -16,8 +16,12 @@ class MissionControl
   def navigate(command)
     if command == :L
       @rover.turn_left
-    elsif command = :R
+    elsif command == :R
       @rover.turn_right
+    elsif command == :M
+      @rover.move
+    else
+      raise("Invalid command")
     end
   end
 

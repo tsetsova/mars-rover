@@ -14,22 +14,22 @@ describe Rover do
   end
 
   it "can turn move one forward" do
-    expect(rover.forward).to eq "2 4 N"
+    expect(rover.move).to eq "2 4 N"
   end
 
   it "can turn move one right" do
     rover.turn_right
-    expect(rover.forward).to eq "3 3 W"
+    expect(rover.move).to eq "3 3 W"
   end
 
   it "can turn move one left" do
     rover.turn_left
-    expect(rover.forward).to eq "1 3 E"
+    expect(rover.move).to eq "1 3 E"
   end
 
   it "can turn move one backwards" do
     rover.turn_left
     rover.turn_left
-    expect(rover.forward).to eq "2 2 S"
+    expect(rover.move).to eq "2 2 S"
   end
 end

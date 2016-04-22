@@ -8,6 +8,10 @@ class Rover
     @facing = direction
   end
 
+  def coordinates
+    "#{@x_coordinate} #{@y_coordinate} #{@facing}"
+  end
+
   def turn_right
     @facing = turn(:right)
     coordinates
@@ -16,23 +20,6 @@ class Rover
   def turn_left
     @facing = turn(:left)
     coordinates
-  end
-
-  def forward
-    move
-    coordinates
-  end
-
-  private
-
-  def coordinates
-    "#{@x_coordinate} #{@y_coordinate} #{@facing}"
-  end
-
-  def turn(direction)
-    index = DIRECTIONS.find_index(@facing)
-    return DIRECTIONS[index + 1] if direction == :right
-    return DIRECTIONS[index - 1] if direction == :left
   end
 
   def move
@@ -45,5 +32,16 @@ class Rover
     else
       @x_coordinate -= 1
     end
+    coordinates
   end
+
+  private
+
+  def turn(direction)
+    index = DIRECTIONS.find_index(@facing)
+    return DIRECTIONS[index + 1] if direction == :right
+    return DIRECTIONS[index - 1] if direction == :left
+  end
+
+
 end

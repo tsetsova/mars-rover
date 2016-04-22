@@ -23,4 +23,12 @@ describe MissionControl do
   it "instructs a rover to turn right" do
     expect(mission_control.navigate(:R)).to eq("1 2 W")
   end
+
+  it "instructs a rover to move" do
+    expect(mission_control.navigate(:M)).to eq("1 3 N")
+  end
+
+  it "raises an error if command is invalid" do
+    expect{mission_control.navigate(:S)}.to raise_error("Invalid command")
+  end
 end
