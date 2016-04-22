@@ -9,7 +9,7 @@ class Rover
   end
 
   def coordinates
-    "X:#{@x_coordinate}, Y: #{@y_coordinate}, facing: #{@facing}"
+    "#{@x_coordinate} #{@y_coordinate} #{@facing}"
   end
 
   def turn_right
