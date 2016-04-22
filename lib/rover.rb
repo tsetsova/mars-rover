@@ -8,23 +8,26 @@ class Rover
     @facing = direction
   end
 
-  def coordinates
-    "#{@x_coordinate} #{@y_coordinate} #{@facing}"
-  end
-
   def turn_right
     @facing = turn(:right)
+    coordinates
   end
 
   def turn_left
     @facing = turn(:left)
+    coordinates
   end
 
   def forward
     move
+    coordinates
   end
 
   private
+
+  def coordinates
+    "#{@x_coordinate} #{@y_coordinate} #{@facing}"
+  end
 
   def turn(direction)
     index = DIRECTIONS.find_index(@facing)
