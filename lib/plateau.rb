@@ -5,6 +5,6 @@ class Plateau
   end
 
   def map
-    @map
+    @map.dup
   end
 end
