@@ -1,7 +1,8 @@
 require 'rover.rb'
 
 describe Rover do
-  subject(:rover) {described_class.new(2, 3, :N, map: Map.new(5, 5))}
+  subject(:rover) {described_class.new(2, 3, :N, map: map)}
+  let(:map){double(:map, movement_is_possible?: true)}
 
   it "can turn right" do
     rover.turn(:R)
