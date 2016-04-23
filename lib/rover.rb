@@ -13,28 +13,19 @@ class Rover
   end
 
   def move
-    movement_is_possible?
     step_forward if movement_is_possible?
   end
 
   def turn(command)
-    if command == :R
-      turn_right
-    else
-      turn_left
-    end
+    @facing = DIRECTIONS[determine_direction(command)]
   end
 
 private
 
-  def turn_right
+  def determine_direction(command)
     index = DIRECTIONS.find_index(@facing)
-    @facing = DIRECTIONS[index + 1]
-  end
-
-  def turn_left
-    index = DIRECTIONS.find_index(@facing)
-    @facing = DIRECTIONS[index - 1]
+    return index + 1 if command == :R
+    return index - 1 if command == :L
   end
 
   def movement_is_possible?
