@@ -2,43 +2,63 @@ class Rover
 
   DIRECTIONS = [:N, :W, :S, :E]
 
-  def initialize(x, y, direction)
-    @x_coordinate = x
-    @y_coordinate = y
+  def initialize(x, y, direction, map: map)
+    @coordinates = {x: x, y: y}
     @facing = direction
+    @map = map
   end
 
   def coordinates
-    "#{@x_coordinate} #{@y_coordinate} #{@facing}"
-  end
-
-  def turn_right
-    @facing = turn(:right)
-  end
-
-  def turn_left
-    @facing = turn(:left)
+    "#{@coordinates[:x]} #{@coordinates[:y]} #{@facing}"
   end
 
   def move
-    if @facing == :N
-      @y_coordinate += 1
-    elsif @facing == :S
-      @y_coordinate -= 1
-    elsif @facing == :W
-      @x_coordinate += 1
+    movement_is_possible?
+    step_forward if movement_is_possible?
+  end
+
+  def turn(command)
+    if command == :R
+      turn_right
     else
-      @x_coordinate -= 1
+      turn_left
     end
   end
 
-  private
+private
 
-  def turn(direction)
+  def turn_right
     index = DIRECTIONS.find_index(@facing)
-    return DIRECTIONS[index + 1] if direction == :right
-    return DIRECTIONS[index - 1] if direction == :left
+    @facing = DIRECTIONS[index + 1]
   end
 
+  def turn_left
+    index = DIRECTIONS.find_index(@facing)
+    @facing = DIRECTIONS[index - 1]
+  end
 
+  def movement_is_possible?
+   target_coordinates
+   @target_x ||= @coordinates[:x]
+   @target_y ||= @coordinates[:y]
+   @map.reachable?(@target_x, @target_y)
+  end
+
+  def target_coordinates
+    case @facing
+    when :N
+      @target_y = @coordinates.dup[:y] += 1
+    when :S
+      @target_y = @coordinates.dup[:y] -= 1
+    when :W
+      @target_x = @coordinates.dup[:x] += 1
+    else
+      @target_x = @coordinates.dup[:x] -= 1
+    end
+  end
+
+  def step_forward
+    @coordinates[:y] = @target_y
+    @coordinates[:x] = @target_x
+  end
 end

@@ -1,17 +1,17 @@
 require 'rover.rb'
 
 describe Rover do
-  subject(:rover) {described_class.new(2, 3, :N)}
+  subject(:rover) {described_class.new(2, 3, :N, map: Map.new(5, 5))}
 
   it "can turn right" do
-    rover.turn_right
-    rover.turn_right
+    rover.turn(:R)
+    rover.turn(:R)
     expect(rover.coordinates).to eq "2 3 S"
   end
 
   it "can turn left" do
-    rover.turn_left
-    rover.turn_left
+    rover.turn(:L)
+    rover.turn(:L)
     expect(rover.coordinates).to eq "2 3 S"
   end
 
@@ -21,21 +21,27 @@ describe Rover do
   end
 
   it "can turn move one right" do
-    rover.turn_right
+    rover.turn(:R)
     rover.move
     expect(rover.coordinates).to eq "3 3 W"
   end
 
   it "can turn move one left" do
-    rover.turn_left
+    rover.turn(:L)
     rover.move
     expect(rover.coordinates).to eq "1 3 E"
   end
 
   it "can turn move one backwards" do
-    rover.turn_left
-    rover.turn_left
+    rover.turn(:L)
+    rover.turn(:L)
     rover.move
     expect(rover.coordinates).to eq "2 2 S"
+  end
+
+  it "can't move off the edge of the map" do
+    rover.move
+    rover.move
+    expect(rover.coordinates).to eq "2 5 N"
   end
 end
