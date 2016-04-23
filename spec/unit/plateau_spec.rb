@@ -16,4 +16,12 @@ describe Plateau do
   end
 
 
+  # it "instructs the landing of a rover" do
+  #   expect(mission_control.map).to eq [[:O,:O,:O,:O,:O],
+  #                                      [:O,:O,:O,:O,:O],
+  #                                      [:O,:X,:O,:O,:O],
+  #                                      [:O,:O,:O,:O,:O],
+  #                                      [:O,:O,:O,:O,:O]];
+  # end
+
 end

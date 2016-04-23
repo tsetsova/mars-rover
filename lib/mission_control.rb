@@ -1,33 +1,22 @@
 class MissionControl
 
-  attr_reader :map
-
-  def initialize(terrain: Plateau.new(x,y), rover: Rover)
+  def initialize(terrain: Plateau.new(x,y), rover_class: Rover)
     @map = terrain.map
     @rovers = []
+    @rover_class = rover_class
   end
 
   def land(x, y, direction)
-    add_to_map(x, y)
-    @rover = Rover.new(x, y, direction)
+    @rover = @rover_class.new(x, y, direction)
     @rovers.push(@rover)
   end
 
   def navigate(command)
-    if command == :L
-      @rover.turn_left
-    elsif command == :R
-      @rover.turn_right
-    elsif command == :M
+    raise "Invalid command" unless [:L, :R, :M].include?(command)
+    if command == :M
       @rover.move
     else
-      raise("Invalid command")
+      @rover.turn(command)
     end
-  end
-
-  private
-
-  def add_to_map(x, y)
-    @map[y][x] = :X
   end
 end

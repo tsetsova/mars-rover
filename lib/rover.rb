@@ -14,12 +14,10 @@ class Rover
 
   def turn_right
     @facing = turn(:right)
-    coordinates
   end
 
   def turn_left
     @facing = turn(:left)
-    coordinates
   end
 
   def move
@@ -32,7 +30,6 @@ class Rover
     else
       @x_coordinate -= 1
     end
-    coordinates
   end
 
   private
