@@ -2,7 +2,7 @@ require 'map.rb'
 
 describe Map do
 
-  subject(:map) {described_class.new(5,6)}
+  subject(:map) {described_class.new(width: 5, height: 6)}
 
   it "states coordinates beyond the map's size are not reachable" do
     expect(map.movement_is_possible?(8,8)).to eq false

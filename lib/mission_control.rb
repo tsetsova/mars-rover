@@ -1,6 +1,6 @@
 class MissionControl
 
-  def initialize(map: Map.new(x,y), rover_class: Rover)
+  def initialize(map: Map.new(width:x, height:y), rover_class: Rover)
     @map = map
     @rover_class = rover_class
   end

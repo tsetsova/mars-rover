@@ -2,7 +2,7 @@ require 'mission_control.rb'
 require 'map.rb'
 
 describe MissionControl do
-  subject(:mission_control) {described_class.new(map: Map.new(5,5), rover_class: rover_class)}
+  subject(:mission_control) {described_class.new(map: Map.new(width: 5, height: 5), rover_class: rover_class)}
     let(:rover_class) {double(:rover_class, new: rover)}
     let(:rover){double(:rover, turn: nil, move: nil)}
 
