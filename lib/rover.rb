@@ -1,8 +1,6 @@
 class Rover
 
-  DIRECTIONS = [:N, :W, :S, :E]
-
-
+  DIRECTIONS = [:N, :E, :S, :W]
 
   def initialize(x, y, direction, map: Map.new(width: width, height: height))
     @x = x
@@ -29,7 +27,7 @@ private
 
   def determine_direction(command)
     index = DIRECTIONS.find_index(@direction)
-    return index + 1 if command == :R
-    return index - 1 if command == :L
+    return (index + 1) % DIRECTIONS.length if command == :R
+    return (index - 1) % DIRECTIONS.length if command == :L
   end
 end

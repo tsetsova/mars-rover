@@ -26,6 +26,6 @@ describe MissionControl do
   end
 
   it "raises an error if command is invalid" do
-    expect{mission_control.navigate(:S)}.to raise_error("Invalid command")
+    expect{mission_control.navigate(:S)}.to raise_error("Invalid command #{:S}")
   end
 end

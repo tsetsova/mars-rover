@@ -1,11 +1,11 @@
 class Map
 
   DIRECTIONS = {N: {x:  0, y:   1},
-                S: {x:  0, y: - 1},
                 E: {x:  1, y:   0},
+                S: {x:  0, y: - 1},
                 W: {x: -1, y:   0}}
 
-  def initialize(width:width, height:height)
+  def initialize(width: , height:)
     @width = width
     @height = height
   end
@@ -24,10 +24,10 @@ class Map
   private
 
   def within_width?(x)
-    x > 0 && x < @width
+    x >= 0 && x <= @width
   end
 
   def within_height?(y)
-    y > 0 && y < @height
+    y >= 0 && y <= @height
   end
 end
