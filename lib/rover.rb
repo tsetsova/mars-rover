@@ -1,6 +1,6 @@
 class Rover
 
-  def initialize(x, y, direction, map: Map.new(width: width, height: height))
+  def initialize(x, y, direction, map:)
     @x = x
     @y = y
     @direction = direction
@@ -19,14 +19,25 @@ class Rover
   end
 
   def turn(command)
-    @direction =  @map_directions[determine_direction(command)]
+    @direction = @map_directions[next_direction_index(command)]
   end
 
 private
 
-  def determine_direction(command)
-    index = @map_directions.find_index(@direction)
-    return (index + 1) % @map_directions.length if command == :R
-    return (index - 1) % @map_directions.length if command == :L
+  def next_direction_index(command)
+    return right_direction_index if command == :R
+    return left_direction_index if command == :L
+  end
+
+  def right_direction_index
+    (direction_index + 1) % @map_directions.length
+  end
+
+  def left_direction_index
+    (direction_index - 1) % @map_directions.length
+  end
+
+  def direction_index
+    @map_directions.find_index(@direction)
   end
 end

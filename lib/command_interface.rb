@@ -1,39 +1,51 @@
 require "stringio"
 
 class CommandInterface
-  def initialize(input=$stdin,output=$stdout, mission_class: MissionControl)
+  def initialize(input=$stdin, output=$stdout,  mission_class: MissionControl)
     @output = output
     @input = input
-    @mission_control = mission_class.new(map: create_map)
-    command_rover
-    command_rover
+    @mission_class = mission_class
   end
 
-  def command_rover
-    create_rover
-    navigate_rover
-    @output.puts @mission_control.coordinates
+  def run
+    generate_mission_control
+    print_rover_final_coordinates
   end
 
   private
 
-  def create_rover
-    landing_input = @input.gets.chomp.split(" ")
-    x = landing_input[0].to_i
-    y = landing_input[1].to_i
-    direction = landing_input[2].to_sym
-    @mission_control.land(x, y, direction)
+  def generate_mission_control
+    @mission_control = @mission_class.new(map: create_map)
   end
 
-  def navigate_rover
-    commands = @input.gets.chomp.split("").map(&:to_sym)
-    @mission_control.send(commands)
+  def print_rover_final_coordinates
+    loop do
+      coordinates = @input.gets
+      directions = @input.gets
+      break if coordinates.nil? || directions.nil?
+
+      deploy_rover(coordinates, directions)
+      @output.puts @mission_control.latest_rover_coordinates
+    end
   end
 
+  def deploy_rover(coordinates, directions)
+    create_rover(coordinates.chomp)
+    navigate_rover(directions.chomp)
+  end
+
+  def create_rover(coordinates)
+    x, y, direction = coordinates.split(" ")
+    @mission_control.land(x.to_i, y.to_i, direction.to_sym)
+  end
+
+  def navigate_rover(directions)
+    commands = directions.split("").map(&:to_sym)
+    @mission_control.transmit(commands)
+  end
 
   def create_map
-    map_dimensions = @input.gets.chomp.split(" ").map(&:to_i)
-    Map.new(width: map_dimensions[0], height: map_dimensions[1])
+    width, height = @input.gets.chomp.split(" ").map(&:to_i)
+    Map.new(width: width, height: height)
   end
-
 end

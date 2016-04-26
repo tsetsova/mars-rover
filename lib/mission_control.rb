@@ -2,7 +2,7 @@ class MissionControl
 
 COMMANDS = [:L, :R, :M].freeze
 
-  def initialize(rover_class: Rover, map: Map.new(width: width, height:height))
+  def initialize(rover_class: Rover, map:)
     @map = map
     @rover_class = rover_class
   end
@@ -11,20 +11,17 @@ COMMANDS = [:L, :R, :M].freeze
     @rover = @rover_class.new(x, y, direction, map: @map)
   end
 
-  def send(commands)
-    commands.map{|command| navigate(command)}
+  def transmit(commands)
+    commands.map{ |command| navigate(command) }
   end
 
-  def coordinates
+  def latest_rover_coordinates
     @rover.coordinates
   end
 
   def navigate(command)
     raise "Invalid command: #{command}" unless COMMANDS.include?(command)
-    if command == :M
-      @rover.move
-    else
-      @rover.turn(command)
-    end
+
+    command == :M ? @rover.move : @rover.turn(command)
   end
 end
