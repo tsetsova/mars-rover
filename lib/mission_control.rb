@@ -1,6 +1,6 @@
 class MissionControl
 
-COMMANDS = [:L, :R, :M]
+COMMANDS = [:L, :R, :M].freeze
 
   def initialize(rover_class: Rover, map: Map.new(width: width, height:height))
     @map = map
@@ -20,7 +20,7 @@ COMMANDS = [:L, :R, :M]
   end
 
   def navigate(command)
-    raise "Invalid navigation: #{command}" unless COMMANDS.include?(command)
+    raise "Invalid command: #{command}" unless COMMANDS.include?(command)
     if command == :M
       @rover.move
     else
