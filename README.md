@@ -126,5 +126,7 @@ cd mars-rover
 # Enjoy
   Take a look, clone down and play, feel free contribute or give feedback :blush:
 
+#Contributors
 
+[Ina Tsetsova](https://github.com/tsetsova)
 
